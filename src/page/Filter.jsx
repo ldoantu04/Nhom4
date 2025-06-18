@@ -1,7 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+const productData = [
+  {
+    name: 'Vợt cầu lông Li Ning Fengying BLADEX 900 (4U)',
+    code: 'AYPU047-4',
+    price: '5,154,545₫',
+    img: '/assets/product_filter.png',
+  },
+  {
+    name: 'Vợt cầu lông Lining Axforce 90 New – Loh Kean Yew 2024',
+    code: 'AYPV001-4',
+    price: '5,007,273₫',
+    img: '/assets/product_filter.png',
+  },
+  {
+    name: 'Vợt cầu lông Li Ning Zhanji Halbertec 4000 -4U',
+    code: 'AYPV009-4',
+    price: '5,032,364₫',
+    img: '/assets/product_filter.png',
+  },
+  {
+    name: 'Set vợt cầu lông Li-Ning Bladex 900 Master',
+    code: 'AYPV019-88',
+    price: '7,069,091₫',
+    img: '/assets/product_filter.png',
+  },
+];
+
 const Filter = () => {
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(productData);
+
+  useEffect(() => {
+    // Extract search term from URL query parameters
+    const queryParams = new URLSearchParams(location.search);
+    const searchParam = queryParams.get('search') || '';
+    setSearchTerm(searchParam);
+
+    // Filter products based on search term
+    if (searchParam) {
+      const filtered = productData.filter(product => 
+        product.name.toLowerCase().includes(searchParam.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(productData);
+    }
+  }, [location.search]);
+
   return (
     <>
     <Header />
@@ -67,41 +117,35 @@ const Filter = () => {
           </select>
         </div>
 
+        {/* Search results message */}
+        {searchTerm && (
+          <div className="mb-4">
+            <p className="text-sm">
+              {filteredProducts.length > 0 
+                ? `Kết quả tìm kiếm cho: "${searchTerm}"`
+                : null}
+            </p>
+          </div>
+        )}
+
         {/* Products */}
-        <div className="grid grid-cols-4 gap-6">
-          {[
-            {
-              name: 'Vợt cầu lông Li Ning Fengying BLADEX 900 (4U)',
-              code: 'AYPU047-4',
-              price: '5,154,545₫',
-              img: '/assets/product_filter.png',
-            },
-            {
-              name: 'Vợt cầu lông Lining Axforce 90 New – Loh Kean Yew 2024',
-              code: 'AYPV001-4',
-              price: '5,007,273₫',
-              img: '/assets/product_filter.png',
-            },
-            {
-              name: 'Vợt cầu lông Li Ning Zhanji Halbertec 4000 -4U',
-              code: 'AYPV009-4',
-              price: '5,032,364₫',
-              img: '/assets/product_filter.png',
-            },
-            {
-              name: 'Set vợt cầu lông Li-Ning Bladex 900 Master',
-              code: 'AYPV019-88',
-              price: '7,069,091₫',
-              img: '/assets/product_filter.png',
-            },
-          ].map((product, i) => (
-            <div key={i} className="text-center text-sm">
-              <img src={product.img} alt={product.name} className="mx-auto mb-2" />
-              <p>{product.name}</p>
-              <p className="text-red-600 font-semibold">{product.price}</p>
-            </div>
-          ))}
-        </div>
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-4 gap-6">
+            {filteredProducts.map((product, i) => (
+              <div key={i} className="text-center text-sm">
+                <img src={product.img} alt={product.name} className="mx-auto mb-2" />
+                <p>{product.name}</p>
+                <p className="text-red-600 font-semibold">{product.price}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-64 bg-[#CAC6C6]">
+            <p className="text-xl font-semibold text-black">
+              KHÔNG TÌM THẤY KẾT QUẢ NÀO VỚI TỪ KHÓA "{searchTerm}"
+            </p>
+          </div>
+        )}
       </div>
     </div>
     <Footer />

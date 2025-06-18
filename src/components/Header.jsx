@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/filter?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
   return (
     <div>
       {/* Top bar */}
       <div className="flex justify-between items-center px-6 py-4 bg-white">
         {/* Search */}
-        <div className="flex items-center border border-gray-300 bg-gray-300 rounded overflow-hidden w-[250px]">
+        <form onSubmit={handleSearch} className="flex items-center border border-gray-300 bg-gray-300 rounded overflow-hidden w-[250px]">
           <input
             type="text"
             placeholder="Tìm Kiếm ..."
             className="px-3 py-2 w-full bg-gray-300 outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <div className="bg-white px-3 py-2 flex items-center justify-center">
+          <button type="submit" className="bg-white px-3 py-2 flex items-center justify-center">
             <img src="/assets/search.png" alt="search icon" className="w-5 h-5" />
-          </div>
-        </div>
+          </button>
+        </form>
 
         {/* Logo */}
         <Link to="/" className="flex items-center justify-center">
