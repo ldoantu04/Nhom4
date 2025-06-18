@@ -39,52 +39,57 @@ const Detail = () => {
           </div>
 
           {/* Thông tin chi tiết */}
-<div className="flex-1 space-y-4 text-sm">
-  <h2 className="font-semibold text-lg">
-    Vợt cầu lông Li Ning Fengying BLADEX 900 (4U)<br /> AYPU047-4
-  </h2>
-  <p className="text-xl font-bold text-[#F41919]">5,154,545₫</p>
+          <div className="flex-1 space-y-4 text-sm">
+            <h2 className="font-semibold text-lg">
+              Vợt cầu lông Li Ning Fengying BLADEX 900 (4U)
+              <br /> AYPU047-4
+            </h2>
+            <p className="text-xl font-bold text-[#F41919]">5,154,545₫</p>
 
-  <div className="text-gray-800 space-y-1">
-    <div className="flex">
-      <span className="inline-block w-48">Mã sản phẩm :</span>
-      <strong>AYPU047-4</strong>
-    </div>
-    <div className="flex">
-      <span className="inline-block w-48">Tình trạng (còn /hết ) :</span>
-      <strong>Còn hàng</strong>
-    </div>
-    <div className="flex">
-      <span className="inline-block w-48">Thương hiệu :</span>
-      <strong>Li-Ning</strong>
-    </div>
-    <div className="flex items-center">
-      <span className="inline-block w-48">Số lượng :</span>
-      <div className="flex items-center border border-gray-400 rounded">
-        <button className="w-8 h-8 flex items-center justify-center text-lg">−</button>
-        <input
-          type="number"
-          min="1"
-          defaultValue="1"
-          className="w-12 text-center border-x border-gray-300 h-8"
-        />
-        <button className="w-8 h-8 flex items-center justify-center text-lg">+</button>
-      </div>
-    </div>
-  </div>
+            <div className="text-gray-800 space-y-1">
+              <div className="flex">
+                <span className="inline-block w-48">Mã sản phẩm :</span>
+                <strong>AYPU047-4</strong>
+              </div>
+              <div className="flex">
+                <span className="inline-block w-48">
+                  Tình trạng (còn /hết ) :
+                </span>
+                <strong>Còn hàng</strong>
+              </div>
+              <div className="flex">
+                <span className="inline-block w-48">Thương hiệu :</span>
+                <strong>Li-Ning</strong>
+              </div>
+              <div className="flex items-center">
+                <span className="inline-block w-48">Số lượng :</span>
+                <div className="flex items-center border border-gray-400 rounded">
+                  <button className="w-8 h-8 flex items-center justify-center text-lg">
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    min="1"
+                    defaultValue="1"
+                    className="w-12 text-center border-x border-gray-300 h-8"
+                  />
+                  <button className="w-8 h-8 flex items-center justify-center text-lg">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
 
-  {/* Nút hành động */}
-  <div className="flex gap-4 mt-14">
-    <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
-      Thêm vào giỏ hàng
-    </button>
-    <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
-      MUA NGAY
-    </button>
-  </div>
-</div>
-
-
+            {/* Nút hành động */}
+            <div className="flex gap-4 mt-14">
+              <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
+                Thêm vào giỏ hàng
+              </button>
+              <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
+                MUA NGAY
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Mô tả sản phẩm */}
