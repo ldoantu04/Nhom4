@@ -14,8 +14,27 @@ const images = [
 
 const Detail = () => {
   const [mainImage, setMainImage] = useState(images[0]);
+  const [quantity, setQuantity] = useState(1);
+  
   const handleAddToCart = () => {
     message.success("Sản phẩm đã được thêm thành công");
+  };
+  
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+  
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value >= 1) {
+      setQuantity(value);
+    }
   };
 
   return (
@@ -70,16 +89,23 @@ const Detail = () => {
               <div className="flex items-center">
                 <span className="inline-block w-48">Số lượng :</span>
                 <div className="flex items-center border border-gray-400 rounded">
-                  <button className="w-8 h-8 flex items-center justify-center text-lg">
+                  <button 
+                    className="w-8 h-8 flex items-center justify-center text-lg"
+                    onClick={decreaseQuantity}
+                  >
                     −
                   </button>
                   <input
                     type="number"
                     min="1"
-                    defaultValue="1"
+                    value={quantity}
+                    onChange={handleQuantityChange}
                     className="w-12 text-center border-x border-gray-300 h-8"
                   />
-                  <button className="w-8 h-8 flex items-center justify-center text-lg">
+                  <button 
+                    className="w-8 h-8 flex items-center justify-center text-lg"
+                    onClick={increaseQuantity}
+                  >
                     +
                   </button>
                 </div>
@@ -87,19 +113,19 @@ const Detail = () => {
             </div>
 
             {/* Nút hành động */}
-<div className="flex gap-4 mt-14">
-        <button 
-          className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110"
-          onClick={handleAddToCart}
-        >
-          Thêm vào giỏ hàng
-        </button>
-        <Link to="/checkout">
-        
-        <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
-          MUA NGAY
-        </button></Link>
-      </div>
+            <div className="flex gap-4 mt-14">
+              <button 
+                className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110"
+                onClick={handleAddToCart}
+              >
+                Thêm vào giỏ hàng
+              </button>
+              <Link to="/checkout">
+                <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
+                  MUA NGAY
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -110,7 +136,7 @@ const Detail = () => {
               MÔ TẢ
             </h3>
           </div>
-          <div className="px-8 space-y-10">
+          <div className="p-4 space-y-6">
             <div>
               <p>
                 <strong>Vợt Cầu Lông Li-Ning Fengying Bladex 900</strong> thiết
@@ -152,8 +178,8 @@ const Detail = () => {
               </h4>
               <ul className="list-none list-inside space-y-1">
                 <li>
-                  Công nghệ HDF Sock Absorption System : Hệ thống hấp thụ chấn
-                  mật độ cao giúp cải thiện tối đa hiệu suất tăng  cường tốc độ
+                  Công nghệ HDF Sock Absorption System : Hệ thống hấp thụ chấn
+                  mật độ cao giúp cải thiện tối đa hiệu suất tăng  cường tốc độ
                   linh hoạt cho tấn công
                 </li>
                 <li>
@@ -162,12 +188,12 @@ const Detail = () => {
                   chịu nhiệt và tăng cấp độ cho khung vợt bền chắc.
                 </li>
                 <li>
-                  Công nghệ  Ultra Carbon: Công nghệ trục vợt cầu lông hiện đại
+                  Công nghệ  Ultra Carbon: Công nghệ trục vợt cầu lông hiện đại
                   được cấp bằng sáng chế, giúp cải thiện tính linh hoạt và nâng
                   cao khả năng kiểm soát và cảm nhận tổng thể của vợt.
                 </li>
                 <li>
-                  SW Head Light : Công nghệ giúp đầu vợt nhẹ tăng kiểm soát tối
+                  SW Head Light : Công nghệ giúp đầu vợt nhẹ tăng kiểm soát tối
                   ưu
                 </li>
                 <li>
@@ -181,7 +207,7 @@ const Detail = () => {
                   mà không xoay để tăng cường tác động của mỗi cú đánh.
                 </li>
                 <li>
-                  Công nghệ Accele Tech: Lining sử dụng công nghệ mới Accele
+                  Công nghệ Accele Tech: Lining sử dụng công nghệ mới Accele
                   Tech trên vật liệu Carbon Fiber để nâng cao hiệu suất ổn định
                   khung vợt để tăng cường độ chính xác hơn cho từng cú đánh
                 </li>
