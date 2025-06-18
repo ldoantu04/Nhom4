@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const CheckoutOnline = () => {
+
+const CheckoutOnline2 = () => {
+  const [voucherApplied, setVoucherApplied] = useState(false);
+  const [voucherText, setVoucherText] = useState("");
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(2955273);
+  
+  useEffect(() => {
+    // Check if voucher is applied from localStorage
+    const isApplied = localStorage.getItem('voucherApplied') === 'true';
+    const voucher = localStorage.getItem('selectedVoucher') || "";
+    
+    setVoucherApplied(isApplied);
+    setVoucherText(voucher);
+    
+    // Calculate discount based on voucher percentage
+    if (isApplied && voucher) {
+      const percentage = parseInt(voucher.replace('%', ''), 10);
+      const discount = Math.round((percentage / 100) * totalAmount);
+      setDiscountAmount(discount);
+      setTotalAmount(2955273 - discount);
+    }
+  }, []);
+  
+  // Format number to currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN').format(amount);
+  };
+
   return (
     <div className="min-h-screen bg-white p-6">
       <div className="max-w-3xl mx-auto space-y-6">
@@ -41,11 +69,18 @@ const CheckoutOnline = () => {
           <div className="grid grid-cols-3 border-b border-[#A9A9A9] text-sm items-center">
             <div className="col-span-1 p-2 font-medium">Mã giảm giá:</div>
             <div className="col-span-2 p-2 flex items-center">
-              <Link to = "/wishlist2" className="bg-[#809FEE] text-black px-7 py-1 rounded-lg text-sm ml-auto border-b border-[#A9A9A9]">
-                Tìm kiếm
-              </Link>
+              {voucherApplied ? (
+                <span className="bg-[#EE6767] text-[#FFE419] px-3 py-1 rounded-lg text-sm ml-auto">
+                  Khuyến mãi {voucherText}
+                </span>
+              ) : (
+                <Link to="/wishlist2" className="bg-[#809FEE] text-black px-7 py-1 rounded-lg text-sm ml-auto">
+                  Tìm kiếm
+                </Link>
+              )}
             </div>
           </div>
+
 
           <div className="grid grid-cols-3 text-sm items-center">
             <div className="col-span-1 p-2 font-medium">
@@ -71,4 +106,4 @@ const CheckoutOnline = () => {
   );
 };
 
-export default CheckoutOnline;
+export default CheckoutOnline2;

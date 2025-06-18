@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const PaySucces = () => {
   return (
     <div className="min-h-screen bg-white p-6">
@@ -50,9 +50,9 @@ const PaySucces = () => {
             </a>
           </p>
 
-          <button className="px-6 py-2 bg-[#4796CE] text-white rounded hover:bg-blue-600">
+          <Link to="/" className="px-6 py-2 bg-[#4796CE] text-white rounded hover:bg-blue-600">
             Tiếp tục mua hàng
-          </button>
+          </Link>
         </div>
       </div>
     </div>

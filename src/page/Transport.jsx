@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Transport = () => {
   const [paymentMethod, setPaymentMethod] = useState('qr');
+  const navigate = useNavigate();
+
+  const handleCompleteOrder = () => {
+    if (paymentMethod === 'cod') {
+      navigate('/paysucces');
+    } else {
+      navigate('/checkout-online');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white p-6">
@@ -61,10 +71,12 @@ const Transport = () => {
 
         {/* Buttons */}
         <div className="flex justify-between pt-6">
-          <button className="px-6 py-2 bg-[#6899D0] text-white rounded-md hover:bg-blue-600">
+          <Link to="/cart" className="px-6 py-2 bg-[#6899D0] text-white rounded-md hover:bg-blue-600">
             Giỏ hàng
-          </button>
-          <button className="px-6 py-2 bg-[#4796CE] text-white rounded-md hover:bg-blue-600">
+          </Link>
+          <button 
+            onClick={handleCompleteOrder}
+            className="px-6 py-2 bg-[#4796CE] text-white rounded-md hover:bg-blue-600">
             Hoàn tất đơn hàng
           </button>
         </div>

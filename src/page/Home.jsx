@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import productImage from "/assets/product.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -41,7 +42,7 @@ const Home = () => {
 
       {/* Product Section */}
       <div className="py-10 bg-white text-center">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-4">
+        <Link to="/detail" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-4">
           {products.map((product, index) => (
             <div key={index} className="text-sm">
               <img
@@ -53,7 +54,7 @@ const Home = () => {
               <p className="text-[#E42E2E] font-semibold">{product.price}</p>
             </div>
           ))}
-        </div>
+        </Link>
       </div>
 
       {/* Sự kiện tháng */}
@@ -86,12 +87,12 @@ const Home = () => {
               </p>
 
               {/* Button */}
-              <button
+              <Link to = "/voucher"
                 className="bg-[#3FD6D3] text-black mr-26 px-4 py-2 rounded shadow-md hover:bg-[#1CAAAE]"
                 style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
               >
                 Xem Ngay
-              </button>
+              </Link>
 
               {/* Sale Badge */}
               <img

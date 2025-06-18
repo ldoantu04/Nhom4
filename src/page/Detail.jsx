@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
+import '@ant-design/v5-patch-for-react-19';
+import { message } from "antd";
 const images = [
   "/assets/product3.png",
   "/assets/product5.png",
@@ -11,6 +14,9 @@ const images = [
 
 const Detail = () => {
   const [mainImage, setMainImage] = useState(images[0]);
+  const handleAddToCart = () => {
+    message.success("Sản phẩm đã được thêm thành công");
+  };
 
   return (
     <>
@@ -81,14 +87,19 @@ const Detail = () => {
             </div>
 
             {/* Nút hành động */}
-            <div className="flex gap-4 mt-14">
-              <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
-                Thêm vào giỏ hàng
-              </button>
-              <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
-                MUA NGAY
-              </button>
-            </div>
+<div className="flex gap-4 mt-14">
+        <button 
+          className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110"
+          onClick={handleAddToCart}
+        >
+          Thêm vào giỏ hàng
+        </button>
+        <Link to="/checkout">
+        
+        <button className="bg-[#F41919] text-white border border-[#000000] w-44 py-2 rounded shadow hover:brightness-110">
+          MUA NGAY
+        </button></Link>
+      </div>
           </div>
         </div>
 

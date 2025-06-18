@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const QRPayment = () => {
   return (
     <div className="min-h-screen bg-white p-6">
@@ -39,9 +39,11 @@ const QRPayment = () => {
           </div>
 
           {/* Confirmation Button */}
+          <Link to="/notification">
           <button className="mt-4 px-6 py-2 bg-[#79A7E4] text-white rounded hover:bg-blue-600">
             Tôi đã hoàn tất thanh toán trên App
           </button>
+          </Link>
         </div>
       </div>
     </div>

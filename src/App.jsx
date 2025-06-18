@@ -11,8 +11,10 @@ import Detail from "./page/Detail";
 import Filter from "./page/Filter";
 import Voucher from "./page/Voucher";
 import WishList from "./components/WishList";
+import WishList2 from "./components/WishList2";
 import Checkout from "./page/Checkout";
 import CheckoutOnline from "./page/CheckoutOnline";
+import CheckoutOnline2 from "./page/CheckoutOnline2";
 import QRPayment from "./page/QRPayment";
 import Transport from "./page/Transport";
 import PaySucces from "./page/PaySucces";
@@ -29,8 +31,10 @@ const App = () => {
           <Route path="/filter" element={<Filter />} />
           <Route path="/voucher" element={<Voucher />} />
           <Route path="/wishlist" element={<WishList />} />
+          <Route path="/wishlist2" element={<WishList2 />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout-online" element={<CheckoutOnline/>} />
+          <Route path="/checkout-online2" element={<CheckoutOnline2/>} />
           <Route path="/qrpay" element={<QRPayment/>} />
           <Route path="/transport" element={<Transport/>} />
           <Route path="/paysucces" element={<PaySucces/>} />

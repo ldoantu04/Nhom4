@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import '@ant-design/v5-patch-for-react-19';
+import { message } from "antd";
 const Cart = () => {
   const navigate = useNavigate();
+    const handleAddToCart = () => {
+    message.success("Sản phẩm đã được xóa thành công");
+  };
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -99,7 +103,7 @@ const Cart = () => {
                           <img
                             src="/assets/delete.png"
                             alt="delete"
-                            className="w-5 h-5 mx-auto"
+                            className="w-5 h-5 mx-auto" onClick={handleAddToCart}
                           />
                         </button>
                       </td>
@@ -126,7 +130,7 @@ const Cart = () => {
                     Tiếp tục mua hàng
                   </button>
                   <button
-                    onClick={() => navigate("/place-order")}
+                    onClick={() => navigate("/checkout")}
                     className="px-4 py-2 bg-[#EB6060] text-white rounded hover:bg-[#E42E2E]"
                   >
                     Tiến hành đặt hàng

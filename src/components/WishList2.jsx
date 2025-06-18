@@ -28,7 +28,7 @@ const vouchers = [
   },
 ];
 
-const WishList = () => {
+const WishList2 = () => {
   const [selectedId, setSelectedId] = useState(1);
   const navigate = useNavigate();
 
@@ -40,15 +40,15 @@ const WishList = () => {
     localStorage.setItem('selectedVoucher', discountText);
     localStorage.setItem('voucherApplied', 'true');
     
-    // Navigate back to checkout
-    navigate('/checkout');
+    // Navigate to CheckoutOnline2
+    navigate('/checkout-online2');
   };
 
   return (
     <div className="max-w-md mx-auto bg-white p-4 text-sm">
       {/* Header line with back icon and title */}
       <div className="flex items-center justify-between border-b pb-2 mb-4 relative">
-        <Link to="/checkout" className="z-10">
+        <Link to="/checkoutonline2" className="z-10">
           <img
             src="assets/back.png"
             alt="back"
@@ -118,4 +118,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default WishList2;

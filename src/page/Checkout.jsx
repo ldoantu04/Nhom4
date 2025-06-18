@@ -1,6 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
+  const [formData, setFormData] = useState({
+    name: "Thi Nguyễn",
+    phone: "012343555",
+    address: "Ngõ 745",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    address: "",
+  });
+
+  const [voucherApplied, setVoucherApplied] = useState(false);
+  const [voucherText, setVoucherText] = useState("");
+
+  const validateName = (name) => {
+    const regex = /^[a-zA-Z0-9]{1,15}$/;
+    if (!regex.test(name)) {
+      return "Họ và tên khách hàng không hợp lệ (độ dài từ 1 - 15 ký tự, không chứa ký tự đặc biệt và khoảng trắng)";
+    }
+    return "";
+  };
+
+  const validatePhone = (phone) => {
+    const regex = /^[a-zA-Z0-9]{8,15}$/;
+    if (!regex.test(phone)) {
+      return "Số điện thoại không hợp lệ (độ dài từ 8 - 15 ký tự, không chứa ký tự đặc biệt và khoảng trắng)";
+    }
+    return "";
+  };
+
+  const validateAddress = (address) => {
+    const regex = /^[a-zA-Z0-9]{1,36}$/;
+    if (!regex.test(address)) {
+      return "Địa chỉ người nhận không hợp lệ (độ dài từ 1 - 36 ký tự, không chứa ký tự đặc biệt và khoảng trắng)";
+    }
+    return "";
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
+    // Validate on change
+    let errorMessage = "";
+    if (name === "name") {
+      errorMessage = validateName(value);
+    } else if (name === "phone") {
+      errorMessage = validatePhone(value);
+    } else if (name === "address") {
+      errorMessage = validateAddress(value);
+    }
+
+    setErrors({
+      ...errors,
+      [name]: errorMessage,
+    });
+  };
+
+  const applyVoucher = (text) => {
+    setVoucherApplied(true);
+    setVoucherText(text);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 bg-white shadow-md rounded-lg">
@@ -46,39 +114,54 @@ const Checkout = () => {
             <div className="relative">
               <input
                 type="text"
+                name="name"
                 placeholder=" "
-                defaultValue="Thi Nguyễn"
+                value={formData.name}
+                onChange={handleInputChange}
                 className="w-full pt-6 pl-2 border rounded placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               <label className="absolute left-2 top-1 text-gray-500 text-sm pointer-events-none">
                 Họ và tên
               </label>
+              {errors.name && (
+                <p className="text-[#EF1414] text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
             {/* SĐT */}
             <div className="relative">
               <input
                 type="text"
+                name="phone"
                 placeholder=" "
-                defaultValue="012343555"
+                value={formData.phone}
+                onChange={handleInputChange}
                 className="w-full pt-6 pl-2 border rounded placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               <label className="absolute left-2 top-1 text-gray-500 text-sm pointer-events-none">
                 Số điện thoại
               </label>
+              {errors.phone && (
+                <p className="text-[#EF1414] text-xs mt-1">{errors.phone}</p>
+              )}
             </div>
 
             {/* Địa chỉ nhập tay (tuỳ chọn) */}
             <div className="relative">
               <input
                 type="text"
+                name="address"
                 placeholder=" "
-                defaultValue="Ngõ 745"
+                value={formData.address}
+                onChange={handleInputChange}
                 className="w-full pt-6 pl-2 border rounded placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               <label className="absolute left-2 top-1 text-gray-500 text-sm pointer-events-none">
                 Địa chỉ
               </label>
+              {errors.address && (
+                <p className="text-[#EF1414] text-xs mt-1">{errors.address}</p>
+              )}
             </div>
 
             {/* Tỉnh và Quận */}
@@ -107,12 +190,18 @@ const Checkout = () => {
 
             {/* Buttons */}
             <div className="flex justify-between pt-2">
-              <button className="px-4 py-2 bg-[#69A7D4] text-white rounded">
+              <Link
+                to="/cart"
+                className="px-4 py-2 bg-[#69A7D4] text-white rounded"
+              >
                 Giỏ hàng
-              </button>
-              <button className="px-4 py-2 bg-[#4796CE] text-white rounded">
+              </Link>
+              <Link
+                to="/transport"
+                className="px-4 py-2 bg-[#4796CE] text-white rounded"
+              >
                 Tiếp tục đến phương thức thanh toán
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -137,7 +226,7 @@ const Checkout = () => {
 
           {/* Mã giảm giá */}
           <div className="flex items-center gap-2 mb-4 border-t pt-4 border-[#cccccc]">
-            <div className="flex items-center border border-[#cccccc] rounded-lg px-2 flex-1">
+            <div className="flex items-center border border-[#cccccc] rounded-lg px-2 flex-1 relative">
               <img
                 src="/assets/voucher_icon.png"
                 alt="voucher"
@@ -146,12 +235,21 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Mã giảm giá"
-                className="flex-1 p-2 outline-none"
+                className="flex-1 p-2 outline-none bg-transparent"
               />
+              {voucherApplied && (
+                <span className="absolute right-2 text-[#FFE419] bg-[#EE6767] rounded-lg font-semibold">
+                  {" "}
+                  Khuyến mãi {voucherText}
+                </span>
+              )}
             </div>
-            <button className="px-3 py-2 bg-[#4B95CA] text-white rounded-md text-md">
+            <Link
+              to="/wishlist"
+              className="px-3 py-2 bg-[#4B95CA] text-white rounded-md text-md"
+            >
               Tìm kiếm
-            </button>
+            </Link>
           </div>
 
           {/* Tổng kết */}
@@ -164,11 +262,36 @@ const Checkout = () => {
               <span>Phí vận chuyển</span>
               <span>—</span>
             </div>
+            {voucherApplied && (
+              <div className="flex justify-between text-red-500">
+                <span>Giảm giá ({voucherText})</span>
+                <span>
+                  -
+                  {voucherText === "50%"
+                    ? "1,477,636"
+                    : voucherText === "20%"
+                    ? "591,054"
+                    : voucherText === "15%"
+                    ? "443,291"
+                    : "0"}
+                  ₫
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-between text-lg font-bold border-t pt-4 border-[#cccccc]">
             <span>Tổng cộng</span>
-            <span>2,955,273₫</span>
+            <span>
+              {voucherApplied && voucherText === "50%"
+                ? "1,477,637"
+                : voucherApplied && voucherText === "20%"
+                ? "2,364,219"
+                : voucherApplied && voucherText === "15%"
+                ? "2,511,982"
+                : "2,955,273"}
+              ₫
+            </span>
           </div>
         </div>
       </div>

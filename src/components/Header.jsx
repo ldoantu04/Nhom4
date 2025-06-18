@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -18,9 +19,9 @@ const Header = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center justify-center">
+        <Link to="/" className="flex items-center justify-center">
           <img src="/assets/logo.png" alt="logo" className="h-10" />
-        </div>
+        </Link>
 
         {/* Hotline & Cart */}
         <div className="flex items-center gap-24">
@@ -31,12 +32,12 @@ const Header = () => {
           </div>
 
           {/* Cart */}
-          <div className="relative">
+          <Link to="/cart" className="relative">
             <img src="/assets/cart.png" alt="cart icon" className="w-12 h-8" />
             <span className="absolute -top-0 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
               5
             </span>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -47,7 +48,7 @@ const Header = () => {
           <li className="hover:underline cursor-pointer">Nam</li>
           <li className="hover:underline cursor-pointer">Nữ</li>
           <li className="hover:underline cursor-pointer">Hệ Thống Cửa Hàng</li>
-          <li className="hover:underline cursor-pointer">Khuyến Mãi</li>
+          <Link to="/voucher" className="hover:underline cursor-pointer">Khuyến Mãi</Link>
         </ul>
       </nav>
     </div>
