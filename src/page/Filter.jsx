@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from 'react-router-dom';
 
 const productData = [
   {
@@ -130,7 +131,7 @@ const Filter = () => {
 
         {/* Products */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-4 gap-6">
+          <Link to="/detail" className="grid grid-cols-4 gap-6">
             {filteredProducts.map((product, i) => (
               <div key={i} className="text-center text-sm">
                 <img src={product.img} alt={product.name} className="mx-auto mb-2" />
@@ -138,7 +139,7 @@ const Filter = () => {
                 <p className="text-red-600 font-semibold">{product.price}</p>
               </div>
             ))}
-          </div>
+          </Link>
         ) : (
           <div className="flex items-center justify-center h-64 bg-[#CAC6C6]">
             <p className="text-xl font-semibold text-black">
